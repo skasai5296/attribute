@@ -4,9 +4,9 @@ This is a repository on attribute prediction.
 Training is done using CelebA dataset or DeepFashion dataset.
 
 ## Using CelebA dataset
-'''
+```
 python main.py
-'''
+```
 
 optional arguments
 
