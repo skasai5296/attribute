@@ -19,8 +19,10 @@ class AttrEncoder(nn.Module):
         self.act = nn.Sigmoid()
 
     def forward(self, x):
+        if x.dim() == 3:
+            x = x.unsqueeze(0)
         with torch.no_grad():
             resout = self.model(x)
-        resout = resout.reshape(resout.size(0), -1)
+        resout = resout.view(resout.size(0), -1)
         out = self.act(self.affine(resout))
         return out

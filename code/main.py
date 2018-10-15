@@ -37,8 +37,8 @@ def train(args):
     criterion = nn.BCELoss().to(device)
 
     print("begin training", flush=True)
-    model.train()
     for ep in range(args.num_epoch):
+        model.train()
         for it, sample in enumerate(trainloader):
             im = sample['image'].to(device)
             t = sample['attributes'].to(device)
@@ -64,7 +64,7 @@ def eval(model, dataloader, device):
     cnt = 0
     allcnt = 0
     model.eval()
-    for j, sample in enumerate(testloader):
+    for j, sample in enumerate(dataloader):
         im = sample['image'].to(device)
         t = sample['attributes'].to(device)
 
@@ -74,6 +74,8 @@ def eval(model, dataloader, device):
             if torch.equal(im[i], out[i]):
                 cnt += 1
             allcnt += 1
+        if j == 10:
+            break
     return cnt, allcnt
 
 def main():
